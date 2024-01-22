@@ -1,6 +1,10 @@
 <script setup lang="ts">
 const config = useRuntimeConfig();
 
+useHead({
+    title: 'Home - xconnor.tv'
+})
+
 const { data } = await useFetch<{
     data: {
         "discord_user": {
@@ -15,8 +19,9 @@ const avatar_url = `https://cdn.discordapp.com/avatars/${config.public.DISCORD_U
 
 </script>
 <template>
-    <div class="space-y-24 h-[100%]">
-        <header class="rounded-md flex flex-col-reverse md:flex-row md:items-center justify-center h-[100%] pb-20">
+    <div class="space-y-24 h-full flex items-center w-full justify-center">
+        <div class="flex flex-col">
+            <header class="rounded-md flex flex-col-reverse md:flex-row md:items-center justify-center h-[100%] sm:gap-40 gap-10">
             <div class="md:w-8/12">
                 <div class="space-y-6">
                     <h1 class="font-semibold text-center text-4xl md:text-6xl md:text-left text-black/90 leading-normal dark:text-white/90">
@@ -38,7 +43,7 @@ const avatar_url = `https://cdn.discordapp.com/avatars/${config.public.DISCORD_U
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col rounded-lg relative space-x-2 space-y-5 p-2">
+            <div class="flex flex-col rounded-lg relative space-x-2 space-y-5 p-2 w-full h-full">
                 <div class="rounded-full mx-auto mb-4 md:mb-0 relative flex">
                     <img :src="avatar_url" class="rounded-full w-48 h-48"/>
                     <span v-if="data?.data.discord_status === 'online'" class='absolute bottom-2 right-2 h-8 w-8 rounded-full bg-green-500 ring dark:ring-neutral-900'></span>
@@ -48,6 +53,8 @@ const avatar_url = `https://cdn.discordapp.com/avatars/${config.public.DISCORD_U
                 </div>
             </div>
         </header>
+        <div class="text-black/50 dark:text-white/30"></div>
+        </div>
     </div>
 
 </template>

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+useHead({
+    title: 'Tools - xconnor.tv'
+})
 </script>
 <template>
     <div class="text-black/50 dark:text-white/30 md:mb-20">

@@ -2,6 +2,9 @@
   useHead({
     htmlAttrs: {
       class: "max-h-screen"
+    },
+    bodyAttrs: {
+      class: "relative"
     }
   })
 </script>

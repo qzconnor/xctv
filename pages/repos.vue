@@ -3,6 +3,9 @@ import type { RepoProps } from '~/types';
 const config = useRuntimeConfig();
 //const {data:repos, error} = await useFetch<RepoProps[]>(`https://api.github.com/users/${config.public.GITHUB_USER_NAME}/repos?per_page=20`)
 
+useHead({
+    title: 'Repositories - xconnor.tv'
+})
 
 const {data: repos, error } = await useAsyncData('repos', async () => {
     const {value, addToCache} = await useDataCache<RepoProps[]>('repos')
@@ -59,7 +62,7 @@ function debounce() {
             <h5 class="text-sm uppercase text-black/50 dark:text-white/30 text-center" data-v-inspector="pages/tools.vue:26:17"> {{ error.message }} </h5>
         </div>
         <div v-else-if="filterdRepos.length !== 0" class="flex h-full relative fade">
-            <div class="grid gap-4 md:grid-cols-2 max-h-full overflow-auto p-3 pb-14 h-max w-max">
+            <div class="grid gap-4 md:grid-cols-2 max-h-full overflow-auto sm:p-3 p-0 pb-14 h-max w-full">
                 <ToolsRepoCard v-for="repo in filterdRepos" :repo="repo" :key="repo.full_name" />
             </div>
         </div>
