@@ -28,7 +28,7 @@ jobs:
 
       - name: Add SSH Key to Agent
         run: |
-          ssh-add ~/.ssh/id_rsa
+          ssh-add - <<<"${{ secrets.SSH_PRIVATE_KEY }}"
           ssh-add -l
 
       - name: Debug SSH Key and Known Hosts
