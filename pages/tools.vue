@@ -2,6 +2,9 @@
 useHead({
     title: 'Tools - xconnor.tv'
 })
+
+const {data: tools} = await useFetch("/api/tools")
+
 </script>
 <template>
     <div class="text-black/50 dark:text-white/30 md:mb-20">
@@ -18,12 +21,7 @@ useHead({
                     Languages
                 </h5>
                 <div class="grid md:grid-cols-3 grid-cols-1 lg:grid-cols-3 gap-x-2 gap-y-2">
-                    <ToolsCard name="TypeScript" icon="typescript" />
-                    <ToolsCard name="Java" icon="java" />
-                    <ToolsCard name="HTML5" icon="html5" />
-                    <ToolsCard name="Tailwind" icon="tailwind" />
-                    <ToolsCard name="Node.js" icon="nodejs" />
-                    <ToolsCard name="Python" icon="python" />
+                    <ToolsCard v-for="item in tools?.languages" :name="item.name" :icon="item.icon" :icon-class="item.class" :no-fill="item.noFill"/>
                 </div>
             </div>
             <div class="lg:w-[50%]">
@@ -31,8 +29,7 @@ useHead({
                     Tools
                 </h5>
                 <div class="grid md:grid-cols-3 grid-cols-1 lg:grid-cols-3 gap-x-2 gap-y-2">
-                    <ToolsCard name="VS Code" icon="vscode" />
-                    <ToolsCard name="Github" icon="github" />
+                    <ToolsCard v-for="item in tools?.tools" :name="item.name" :icon="item.icon" :icon-class="item.class" :no-fill="item.noFill"/>
                 </div>
             </div>
             </div>
@@ -42,8 +39,7 @@ useHead({
                     Frameworks
                 </h5>
                 <div class="grid md:grid-cols-3 grid-cols-1 lg:grid-cols-3 gap-x-2 gap-y-2">
-                    <ToolsCard name="Nuxt" icon="nuxt"/>
-                    <ToolsCard name="Vue.js" icon="vue"/>
+                    <ToolsCard v-for="item in tools?.frameworks" :name="item.name" :icon="item.icon" :icon-class="item.class" :no-fill="item.noFill"/>
                 </div>
             </div>
             <div class="lg:w-[50%]">
@@ -51,8 +47,7 @@ useHead({
                     Database
                 </h5>
                 <div class="grid md:grid-cols-3 grid-cols-1 lg:grid-cols-3 gap-x-2 gap-y-2">
-                    <ToolsCard name="SQL" icon="mariadb"/>
-                    <ToolsCard name="Mongo DB" icon="mongodb" />
+                    <ToolsCard v-for="item in tools?.databases" :name="item.name" :icon="item.icon" :icon-class="item.class" :no-fill="item.noFill"/>
                 </div>
             </div>
             </div>
