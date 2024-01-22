@@ -1,31 +1,25 @@
+name: Deploy to Linux Server
+
 on:
   push:
     branches:
-      - main
-  workflow_dispatch:
-  
+      - ${{ secrets.MAIN_BRANCH }}
+
 jobs:
-  run_pull:
-    name: Run Pull
+  deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Install SSH Keys
-      run: |
-        install -m 600 -D /dev/null ~/.ssh/id_rsa
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Connect and Pull
-      run: |
-        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-    - name: Check Git Pull Status
-      run: |
-        if [ $? -ne 0 ]; then
-          echo "Git pull failed. Check the logs for more information."
-          exit 1
-        fi
-
-    - name: Cleanup
-      run: rm -rf ~/.ssh
+      - name: Deploy Code
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git pull origin ${{ secrets.MAIN_BRANCH }}"
