@@ -20,7 +20,8 @@ useHead({
                 <div class="mt-4 grid gap-2">
                     <ToolsExpCard title="Cosmeticmod.com" job="Web-Developer" link="https://cosmeticsmod.com/" span="2020-present"/>
                     <ToolsExpCard title="Labyaddons.de" job="Creator" link="https://labyaddons.de/" span="2021-present"/>
-                </div>
+                </div>sudo systemctl reload nginx
+
             </div>
             <div>
                 <div class="flex items-center gap-4 justify-between">
