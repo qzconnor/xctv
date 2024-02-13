@@ -16,6 +16,8 @@ const { data } = await useFetch<{
 }>(`https://api.lanyard.rest/v1/users/${config.public.DISCORD_USER_ID}`)
 const avatar_url = `https://cdn.discordapp.com/avatars/${config.public.DISCORD_USER_ID}/${data.value?.data.discord_user.avatar}.png?size=512`
 
+const { data: landingTools } = await useFetch("/api/tools")
+
 
 </script>
 <template>
@@ -28,14 +30,14 @@ const avatar_url = `https://cdn.discordapp.com/avatars/${config.public.DISCORD_U
                         Full-Stack <br> Developer
                     </h1>
                     <div class="flex items-center justify-center md:justify-start gap-x-3 gap-y-2 flex-wrap">
-                        <a class="cursor-pointer justify-center px-5 py-2 rounded-lg card-base flex items-center space-x-2 inline-block w-max">
-                            <NuxtIcon name="typescript" filled class="text-xl" />
-                        </a>
-                        <a class="cursor-pointer justify-center px-5 py-2 rounded-lg card-base flex items-center space-x-2 inline-block w-max">
-                            <NuxtIcon name="vue" filled class="text-xl" />
-                        </a>
-                        <a class="cursor-pointer justify-center px-5 py-2 rounded-lg card-base flex items-center space-x-2 inline-block w-max">
-                            <NuxtIcon name="nodejs" filled class="text-xl" />
+                        
+                        <a v-if="landingTools" v-for="item of useShuffle([
+                                ...landingTools.databases, 
+                                ...landingTools.frameworks,
+                                ...landingTools.languages,
+                                ...landingTools.tools
+                            ]).slice(0, 3)" class="cursor-pointer justify-center px-5 py-2 rounded-lg card-base flex items-center space-x-2 inline-block w-max">
+                            <NuxtIcon v-if="item.icon" :name="item.icon" :filled="item.noFill === undefined || !item.noFill" class="text-xl" />
                         </a>
                         <a href="/tools" class="cursor-pointer justify-center px-5 py-2 rounded-lg card-base flex items-center space-x-2 inline-block w-max">
                             <NuxtIcon name="more" filled class="text-xl" />
