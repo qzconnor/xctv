@@ -3,3 +3,9 @@ services:
     build: .
     container_name: xctv-website
     restart: unless-stopped
+    networks:
+      - npm_default
+  
+networks:
+  npm_default:
+    external: true
