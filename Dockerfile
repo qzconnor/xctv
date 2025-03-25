@@ -8,14 +8,14 @@ WORKDIR /app
 FROM base AS dependencies
 COPY --link package.json package-lock.json ./
 RUN npm install
-RUN npm install -g prisma
+# RUN npm install -g prisma
 
 # FROM dependencies AS prisma
 # COPY --link prisma ./prisma
 # RUN npx prisma generate
 
 # Build the application
-# FROM prisma AS build
+FROM prisma AS build
 COPY --link . .
 RUN npm run build
 
