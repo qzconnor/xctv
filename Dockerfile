@@ -1,7 +1,7 @@
 # Use a base image for building
-ARG NODE_VERSION=lts-alpine
+ARG NODE_VERSION=23
 
-FROM node:${NODE_VERSION} AS base
+FROM node:${NODE_VERSION}-slim AS base
 WORKDIR /app
 
 # Install dependencies
@@ -21,7 +21,7 @@ RUN npm run build
 
 
 # Prepare the production image
-FROM node:${NODE_VERSION} AS production
+FROM node:${NODE_VERSION}-slim AS production
 WORKDIR /app
 
 # Install system dependencies required for Prisma

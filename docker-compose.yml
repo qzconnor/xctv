@@ -1,5 +1,5 @@
 services:
   xctv:
-    build:
-      dockerfile: Dockerfile
-      context: .
+    build: .
+    container_name: xctv-website
+    restart: unless-stopped
