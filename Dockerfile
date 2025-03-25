@@ -1,5 +1,5 @@
 # Use a base image for building
-ARG NODE_VERSION=23-alpine3.20
+ARG NODE_VERSION=lts-alpine
 
 FROM node:${NODE_VERSION}-slim AS base
 WORKDIR /app
