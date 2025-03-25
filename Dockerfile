@@ -1,5 +1,5 @@
 # Use a base image for building
-ARG NODE_VERSION=20.18.0
+ARG NODE_VERSION=lastest
 
 FROM node:${NODE_VERSION}-slim AS base
 WORKDIR /app
