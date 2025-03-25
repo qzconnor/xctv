@@ -11,7 +11,6 @@
 <template>
   <NuxtLayout>
     <NuxtPage />
-
     <Wave />
   </NuxtLayout>
 </template>
