@@ -1,7 +1,7 @@
 # Use a base image for building
 ARG NODE_VERSION=lts-alpine
 
-FROM node:${NODE_VERSION}-slim AS base
+FROM node:${NODE_VERSION} AS base
 WORKDIR /app
 
 # Install dependencies
