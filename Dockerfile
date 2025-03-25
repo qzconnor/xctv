@@ -8,6 +8,8 @@ WORKDIR /app
 FROM base AS dependencies
 COPY --link package.json package-lock.json ./
 RUN npm install
+RUN npm run build
+
 # RUN npm install -g prisma
 
 # FROM dependencies AS prisma
@@ -15,9 +17,9 @@ RUN npm install
 # RUN npx prisma generate
 
 # Build the application
-FROM prisma AS build
-COPY --link . .
-RUN npm run build
+# FROM base AS build
+# COPY --link . .
+# RUN npm run build
 
 
 # Prepare the production image
@@ -29,14 +31,14 @@ RUN apt-get update && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
 
 
 # Copy only the built output and necessary files
-COPY --from=build /app/.output /app/.output
-COPY --from=build /app/package*.json /app/
+COPY --from=base /app/.output /app/.output
+COPY --from=base /app/package*.json /app/
 
 #COPY --from=build /app/.env /app/.env
 
 # COPY --from=prisma /app/node_modules/.prisma /app/node_modules/.prisma
 # COPY --from=prisma /app/node_modules/@prisma /app/node_modules/@prisma
-COPY --from=build /app/node_modules /app/node_modules
+# COPY --from=base /app/node_modules /app/node_modules
 # COPY --link prisma ./prisma  
 # Include Prisma schema for runtime operations if needed
 
