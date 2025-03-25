@@ -21,7 +21,7 @@ RUN npm run build
 
 
 # Prepare the production image
-FROM node:${NODE_VERSION}-slim AS production
+FROM node:${NODE_VERSION} AS production
 WORKDIR /app
 
 # Install system dependencies required for Prisma
